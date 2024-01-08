@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRC Scouting App - Model 1</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #8739;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #8739;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        label, select, input {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #8739;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>FRC Scouting App - Model 1</h1>
+    </header>
+
+    <form id="scoutingForm">
+        <!-- Pre-Match Section -->
+        <h2>Pre-Match Section</h2>
+        <label for="scouterName">Scouter Name:</label>
+        <input type="text" id="scouterName" name="scouterName" required>
+
+        <label for="matchNumber">Match Number:</label>
+        <input type="number" id="matchNumber" name="matchNumber" min="1" required>
+
+        <label for="teamNumber">Team Number:</label>
+        <input type="number" id="teamNumber" name="teamNumber" min="1" required>
+
+        <label for="allianceColor">Alliance Color:</label>
+        <select id="allianceColor" name="allianceColor">
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+        </select>
+
+        <label for="startingPosition">Starting Position:</label>
+        <select id="startingPosition" name="startingPosition">
+            <option value="1">Position 1</option>
+            <option value="2">Position 2</option>
+            <option value="3">Position 3</option>
+        </select>
+
+        <!-- Autonomous Period Section -->
+        <h2>Autonomous Period</h2>
+        <label for="autoCrossedLine">Crossed Auto Line:</label>
+        <select id="autoCrossedLine" name="autoCrossedLine">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <label for="autoSpeakerNotes">Speaker Notes:</label>
+        <input type="number" id="autoSpeakerNotes" name="autoSpeakerNotes" min="0">
+
+        <label for="autoAmpNotes">Amp Notes:</label>
+        <input type="number" id="autoAmpNotes" name="autoAmpNotes" min="0">
+
+        <!-- Teleoperated Period Section -->
+        <h2>Teleoperated Period</h2>
+        <label for="teleopSpeakerNotes">Speaker Notes:</label>
+        <input type="number" id="teleopSpeakerNotes" name="teleopSpeakerNotes" min="0">
+
+        <label for="teleopAmpNotes">Amp Notes:</label>
+        <input type="number" id="teleopAmpNotes" name="teleopAmpNotes" min="0">
+
+        <label for="teleopAmplifiedSpeakerNotes">Amplified Speaker Notes:</label>
+        <input type="number" id="teleopAmplifiedSpeakerNotes" name="teleopAmplifiedSpeakerNotes" min="0">
+
+        <label for="teleopNotesInTrap">Notes in Trap:</label>
+        <select id="teleopNotesInTrap" name="teleopNotesInTrap">
+            <option value="0">None</option>
+            <option value="1">1 Note</option>
+            <option value="2">2 Notes</option>
+            <option value="3">3 Notes</option>
+        </select>
+
+        <label for="cooperationBonus">Cooperation Bonus:</label>
+        <select id="cooperationBonus" name="cooperationBonus">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <!-- Endgame Section -->
+        <h2>Endgame</h2>
+        <label for="endgameHangOnChain">Hang on Chain:</label>
+        <select id="endgameHangOnChain" name="endgameHangOnChain">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <label for="endgameHarmonizeOnChain">Harmonize on Chain:</label>
+        <select id="endgameHarmonizeOnChain" name="endgameHarmonizeOnChain">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+
+        <!-- Lead Scout Access Section -->
+        <h2>Lead Scout Access</h2>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <button type="button" onclick="checkLeadScoutAccess()">Access Lead Scout Section</button>
+    </form>
+
+
+</body>
+
+</html>
