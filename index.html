@@ -152,7 +152,7 @@
         </select>
 
         <!-- Submit Button -->
-        <button type="submit">Submit</button>
+         <button type="button" onclick="submitScoutingData()">Submit</button>
 
         <!-- Lead Scout Access Section -->
         <h2>Lead Scout Access</h2>
@@ -161,7 +161,215 @@
         <button type="button" onclick="checkLeadScoutAccess()">Access Lead Scout Section</button>
     </form>
 
+    <section id="leadScoutSection" style="display: none;">
+        <h2>Lead Scout Section</h2>
+        <!-- Lead Scout functionalities and data visualization go here -->
+    </section>
 
+    <footer>
+        <!-- Your existing footer content -->
+    </footer>
+
+    <!-- Your existing script tags for app.js and additional scripts -->
+    <script src="app.js"></script>
+
+    <script>
+    async function submitScoutingData() {
+        // Validate form fields before submission
+        const isFormValid = validateForm();
+        if (!isFormValid) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+
+        // Your data submission logic
+        // ...
+
+        // Example: hardcoded data for testing
+        const scoutingData = {
+            // Extract data from the form fields
+            // ...
+
+            teamNumber: 123,
+            allianceColor: 'red',
+            // ...
+        };
+
+        // Simulate storing data on the server
+        const response = await storeDataOnServer(scoutingData);
+
+        // Check the response and handle accordingly
+        if (response.success) {
+            alert('Data submitted successfully!');
+        } else {
+            alert('Failed to submit data. Please try again.');
+        }
+    }
+
+    function validateForm() {
+        const requiredFields = document.querySelectorAll('[required]');
+        let isValid = true;
+        requiredFields.forEach((field) => {
+            if (!field.value.trim()) {
+                isValid = false;
+            }
+        });
+        return isValid;
+    }
+
+    function checkLeadScoutAccess() {
+        const passwordInput = document.getElementById('password').value;
+        const correctPassword = 'scout24'; // Change this to your desired password
+
+        if (passwordInput === correctPassword) {
+            document.getElementById('scoutingForm').style.display = 'none';
+            document.getElementById('leadScoutSection').style.display = 'block';
+
+            // Implement Lead Scout functionalities here
+            // This could include accessing and visualizing data
+            visualizeData(); // Added to visualize data after accessing Lead Scout Section
+        } else {
+            alert('Incorrect password. Please try again.');
+        }
+    }
+
+    async function storeDataOnServer(data) {
+        // Simulate storing data on the server (replace with actual server-side logic)
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                // For simplicity, returning a simulated success response
+                resolve({ success: true });
+            }, 1000); // Simulating a delay of 1 second
+        });
+    }
+
+    // Basic data visualization placeholder
+    function visualizeData() {
+        const visualizationSection = document.getElementById('leadScoutSection');
+        visualizationSection.innerHTML = `
+            <h2>Lead Scout Section</h2>
+            <canvas id="dataVisualization" width="400" height="400"></canvas>
+            <!-- Additional visualization components can be added here -->
+        `;
+
+        // Example: Draw a simple chart (Replace this with your actual data visualization logic)
+        const canvas = document.getElementById('dataVisualization');
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'red';
+        ctx.fillRect(50, 50, 100, 100);
+    }
+    const teamsData = {
+        123: {
+            teamNumber: 123,
+            allianceColor: 'red',
+            autoCrossedLine: 'yes',
+            // ... (include other data fields)
+        },
+        456: {
+            teamNumber: 456,
+            allianceColor: 'blue',
+            autoCrossedLine: 'no',
+            // ... (include other data fields)
+        },
+        // ... (add more teams)
+    };
+
+    function visualizeData() {
+        const visualizationSection = document.getElementById('leadScoutSection');
+        visualizationSection.innerHTML = `
+            <h2>Lead Scout Section</h2>
+            <label for="selectTeam">Select Team:</label>
+            <select id="selectTeam" onchange="showTeamData(this.value)">
+                <option value="" disabled selected>Select a team</option>
+                ${Object.keys(teamsData).map((teamNumber) => `<option value="${teamNumber}">${teamNumber}</option>`).join('')}
+            </select>
+            <div id="teamData"></div>
+        `;
+
+        // Additional visualization components can be added here
+    }
+
+    function showTeamData(teamNumber) {
+        const teamDataDiv = document.getElementById('teamData');
+        if (!teamNumber) {
+            teamDataDiv.innerHTML = '';
+            return;
+        }
+
+        const teamData = teamsData[teamNumber];
+        if (teamData) {
+            teamDataDiv.innerHTML = `
+                <h3>Team ${teamNumber} Data</h3>
+                <p>Alliance Color: ${teamData.allianceColor}</p>
+                <p>Auto Crossed Line: ${teamData.autoCrossedLine}</p>
+                <!-- Include other data fields -->
+            `;
+        } else {
+            teamDataDiv.innerHTML = 'Team data not available.';
+        }
+    }
+    function visualizeData() {
+        const visualizationSection = document.getElementById('leadScoutSection');
+        visualizationSection.innerHTML = `
+            <h2>Lead Scout Section</h2>
+            <label for="selectTeam">Select Team:</label>
+            <select id="selectTeam" onchange="showTeamData(this.value)">
+                <option value="" disabled selected>Select a team</option>
+                ${Object.keys(teamsData).map((teamNumber) => `<option value="${teamNumber}">${teamNumber}</option>`).join('')}
+            </select>
+            <div id="teamData"></div>
+            <div id="overallStats"></div>
+        `;
+
+        // Additional visualization components can be added here
+    }
+
+    function showTeamData(teamNumber) {
+        const teamDataDiv = document.getElementById('teamData');
+        const overallStatsDiv = document.getElementById('overallStats');
+        if (!teamNumber) {
+            teamDataDiv.innerHTML = '';
+            overallStatsDiv.innerHTML = '';
+            return;
+        }
+
+        const teamData = teamsData[teamNumber];
+        if (teamData) {
+            teamDataDiv.innerHTML = `
+                <h3>Team ${teamNumber} Data</h3>
+                <p>Alliance Color: ${teamData.allianceColor}</p>
+                <p>Auto Crossed Line: ${teamData.autoCrossedLine}</p>
+                <!-- Include other data fields -->
+            `;
+
+            overallStatsDiv.innerHTML = `
+                <h3>Overall Stats for Team ${teamNumber}</h3>
+                <!-- Include your radar chart or other visualizations for overall stats -->
+                <canvas id="radarChart" width="400" height="400"></canvas>
+                <p>Team Description: ${getTeamDescription(teamNumber)}</p>
+            `;
+            // Example: Draw a radar chart (Replace this with your actual data visualization logic)
+            drawRadarChart();
+        } else {
+            teamDataDiv.innerHTML = 'Team data not available.';
+            overallStatsDiv.innerHTML = '';
+        }
+    }
+
+    function getTeamDescription(teamNumber) {
+        // Replace this with logic to fetch or determine team description
+        return "This team is known for their strong scoring capabilities and efficient gameplay.";
+    }
+
+    function drawRadarChart() {
+        // Example: Draw a radar chart (Replace this with your actual radar chart logic)
+        const canvas = document.getElementById('radarChart');
+        const ctx = canvas.getContext('2d');
+        // Draw your radar chart here
+    }
+
+    // ... (remaining functions)
+</script>
 </body>
 
 </html>
